@@ -1,0 +1,27 @@
+{
+  "/page2/index.html": {
+    "pageTitle": "page2",
+    "description": "page2 description",
+    "ogp": {
+      "type": "article",
+      "image": "/images/ogp.jpg"
+    },
+    "twitter": {
+      "card": "summary"
+    }
+  },
+  "/about/sub.html": {
+    "pageTitle": "page2 sub page"
+  },
+  "/page3/index.html": {
+    "pageTitle": "page3",
+    "description": "page3 description",
+    "ogp": {
+      "type": "article",
+      "image": "/images/ogp.jpg"
+    },
+    "twitter": {
+      "card": "summary"
+    }
+  }
+}

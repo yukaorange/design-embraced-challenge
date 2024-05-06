@@ -1,0 +1,287 @@
+@use "./../libs/ress.min.css";
+@use "./fonts";
+@use "./../mixin/" as *;
+
+:root {
+  --vw: 100vw; //this value will be changed by js
+  --vh: 100vh; //this value will be changed by js
+
+  --header-height: 8rem; //this value will be changed by js
+
+  --inner: calc(var(--vw) - var(--vw) / 24 * 2);
+
+  --col: calc((var(--vw)) / 28);
+
+  --margin: 4rem;
+
+  --delay: 0.2s;
+  --duration: 0.4s;
+  --timing-function: var(--easeInOutQuint);
+}
+
+@include mq(sp) {
+  :root {
+    --inner: calc(var(--vw) - var(--vw) / 24 * 2);
+    --col: calc((var(--vw)) / 24);
+  }
+}
+
+::-webkit-scrollbar {
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ccc;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #444;
+}
+
+html {
+  font-size: calc(var(--vw) / 136.6);
+  scrollbar-width: thin; //webkit
+  scrollbar-color: #444 #ccc; //webkit
+  min-height: 100vh;
+}
+
+@include mq(sp) {
+  html {
+    font-size: calc(var(--vw) / 36);
+  }
+}
+
+body {
+  color: var(--black-1);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+
+  font-family: "Noto Sans JP", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+}
+
+p {
+  font-size: var(--font-size-base);
+}
+
+h1 {
+  font-size: var(--font-size-6);
+}
+
+h2 {
+  font-size: var(--font-size-5);
+}
+
+h3 {
+  font-size: var(--font-size-4);
+}
+
+h4 {
+  font-size: var(--font-size-3);
+}
+
+h5 {
+  font-size: var(--font-size-2);
+}
+
+h6 {
+  font-size: var(--font-size-1);
+}
+
+// Safari対策
+a[href^="tel"] {
+  text-decoration: none;
+}
+
+[data-device="sp"] {
+  display: none;
+}
+[data-device="pc"] {
+  display: inherit;
+}
+
+@include mq(sp) {
+  [data-device="sp"] {
+    display: inherit;
+  }
+  [data-device="pc"] {
+    display: none;
+  }
+}
+
+a {
+  font-size: var(--font-size-base);
+  color: inherit;
+  text-decoration: none;
+  transition: var(--duration);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+  }
+}
+
+svg {
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+// SVGスプライトのためのスタイル
+.use-sprite {
+  position: absolute;
+  height: 0;
+  & > svg {
+    display: block;
+    height: 0;
+  }
+}
+
+._en {
+  font-family:
+    "Jost",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+._serif {
+  font-family: "Noto Serif JP", "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho",
+    system-ui, serif;
+}
+
+//font-size
+:root {
+  --font-size-small-3: calc(1.5rem * 8 / 11);
+  --font-size-small-2: calc(1.5rem * 8 / 10);
+  --font-size-small-1: calc(1.5rem * 8 / 9);
+  --font-size-base: calc(1.5rem * 8 / 8);
+  --font-size-1: calc(1.5rem * 8 / 7);
+  --font-size-2: calc(1.5rem * 8 / 6);
+  --font-size-3: calc(1.5rem * 8 / 5);
+  --font-size-4: calc(1.5rem * 8 / 4);
+  --font-size-5: calc(1.5rem * 8 / 3);
+  --font-size-6: calc(1.5rem * 8 / 2);
+  --font-size-7: calc(1.5rem * 8 / 1);
+  --font-size-8: calc(1.5rem * 8 / 0.8);
+  --font-size-9: calc(1.5rem * 8 / 0.6);
+  @include mq(sp) {
+    --font-size-small-3: calc(1.3rem * 16 / 19);
+    --font-size-small-2: calc(1.3rem * 16 / 18);
+    --font-size-small-1: calc(1.3rem * 16 / 17);
+    --font-size-base: calc(1.3rem * 16 / 16);
+    --font-size-1: calc(1.3rem * 16 / 15);
+    --font-size-2: calc(1.3rem * 16 / 14);
+    --font-size-3: calc(1.3rem * 16 / 13);
+    --font-size-4: calc(1.3rem * 16 / 12);
+    --font-size-5: calc(1.3rem * 16 / 11);
+    --font-size-6: calc(1.3rem * 16 / 10);
+    --font-size-7: calc(1.3rem * 16 / 9);
+    --font-size-8: calc(1.3rem * 16 / 8);
+    --font-size-9: calc(1.3rem * 16 / 7);
+  }
+}
+
+//color
+:root {
+  --white-1: #ffffff;
+  --white-2: rgba(255, 255, 255, 0.7);
+  --white-3: rgba(255, 249, 245, 0.8);
+  --black-1: #4c4c4c;
+  --black-2: rgba(0, 0, 0, 0.72);
+  --black-3: rgba(0, 0, 0, 0.5);
+  --black-4: rgba(0, 0, 0, 0.3);
+  --black-5: rgba(0, 0, 0, 0.1);
+  --gray-1: rgba(204, 214, 214, 0.16);
+  --gray-2: #d8d8d8;
+  --gray-3: #f2f2f2;
+  --gray-4: #f5f5f5;
+  --gray-5: #f7f7f7;
+  --gray-6: #f9f9f9;
+  --red-1: #9d1c10;
+  --red-2: #e57373;
+  --red-3: #ef5350;
+  --red-4: #f44336;
+  --red-5: #d32f2f;
+  --green-1: #586c4a;
+  --green-2: #81c784;
+  --green-3: #66bb6a;
+  --green-4: #4caf50;
+  --green-5: #388e3c;
+  --blue-1: #12899f;
+  --blue-2: #4e8088;
+  --blue-3: #195077;
+  --blue-4: #d5e5e8;
+  --blue-5: #188398;
+  --yellow-1: #f9c767;
+  --yellow-2: #fff176;
+  --yellow-3: #ffee58;
+  --yellow-4: #ffeb3b;
+  --yellow-5: #fdd835;
+  --brown-1: #423320;
+  --brown-2: #8d6e63;
+  --brown-3: #795548;
+  --brown-4: #6d4c41;
+  --brown-5: #5d4037;
+  --baige-1: #efece8;
+  --baige-2: #f5ece3;
+}
+
+// easing
+:root {
+  --linear: cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  --easeInSine: cubic-bezier(0.47, 0, 0.745, 0.715);
+  --easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+  --easeInOutSine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  --easeInQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --easeOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --easeInOutQuad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+  --easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --easeInQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+  --easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
+  --easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --easeOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+  --easeInOutExpo: cubic-bezier(1, 0, 0, 1);
+
+  --easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  --easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --easeInOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  --easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  --easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

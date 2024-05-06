@@ -1,0 +1,66 @@
+html {
+  @font-face {
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/Jost-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/fonts/Jost-Medium.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Noto Sans JP";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/NotoSansJP-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Noto Sans JP";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/fonts/NotoSansJP-Medium.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Noto Sans JP";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/NotoSansJP-Bold.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Noto Serif JP";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/NotoSerifJP-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Noto Serif JP";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/fonts/NotoSerifJP-Medium.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Noto Serif JP";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/NotoSerifJP-Bold.woff") format("woff");
+  }
+}
+

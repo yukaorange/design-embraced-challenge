@@ -1,0 +1,34 @@
+{
+  "site": {
+    "name": "takaoka-portfolio",
+    "name_separate": " | ",
+    "domain": "takaoka.com",
+    "favicon": "/favicon.svg",
+    "description": "portfolio site.",
+    "ogp": {
+      "type": "website",
+      "image": "/ogp.jpg"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "username": "@takaoka"
+    }
+  },
+  "image": {
+    "optimization": {
+      "png": {
+        "quality": 80
+      },
+      "jpeg": {
+        "quality": 80
+      },
+      "jpg": {
+        "quality": 80
+      },
+      "webp": {
+        "quality": 80,
+        "lossless": true
+      }
+    }
+  }
+}

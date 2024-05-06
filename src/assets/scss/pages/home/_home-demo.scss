@@ -1,0 +1,19 @@
+@use "./../../mixin/" as *;
+
+.home-demo {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding-right: calc(var(--col) * 1);
+  padding-bottom: 6.4rem;
+}
+
+@include mq(sp) {
+  .home-demo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-right: calc(var(--col) * 1);
+    padding-bottom: 3.2rem;
+  }
+}

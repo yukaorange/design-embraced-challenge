@@ -1,0 +1,28 @@
+@use "./../mixin/" as *;
+.drawer-nav {
+  display: none;
+}
+
+.drawer-nav.active {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background-color: var(--gray-2);
+  overscroll-behavior-y: contain;
+  overflow-y: auto;
+  scrollbar-width: none;
+  scrollbar-color: #444 #ccc;
+}
+
+.drawer-nav__inner {
+  min-height: calc(100svh + 1px);
+  display: grid;
+  place-items: center;
+}
+
+.drawer-nav__close {
+  color: var(--black-1);
+  text-transform: uppercase;
+  font-size: var(--font-size-2);
+}

@@ -1,0 +1,14 @@
+@use "./../mixin/" as *;
+
+.list-drawer-nav {
+  display: grid;
+  row-gap: 1.6rem;
+}
+
+.item-drawer-nav {
+}
+
+.item-drawer-nav__link {
+  text-transform: uppercase;
+  font-size: var(--font-size-2);
+}
