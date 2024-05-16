@@ -20,10 +20,32 @@ export default class Composer {
 
     this.renderPass = new RenderPass(this.scene, this.camera)
 
+    const bloomParam = {
+      exposure: 1.25,
+      bloomStrength: 1,
+      bloomThreshold: 0.75,
+      bloomRadius: 1.25
+    }
+
+    this.unrealBloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      bloomParam.exposure,
+      bloomParam.bloomStrength,
+      bloomParam.bloomThreshold,
+      bloomParam.bloomRadius
+    )
+
     this.createPass()
+  }
+
+  resize({ sizes, device }) {
+    this.composer.setSize(window.innerWidth, window.innerHeight)
+
+    this.unrealBloomPass.setSize(window.innerWidth, window.innerHeight)
   }
 
   createPass() {
     this.composer.addPass(this.renderPass)
+    // this.composer.addPass(this.unrealBloomPass)
   }
 }
