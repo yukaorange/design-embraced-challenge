@@ -96,10 +96,17 @@ export default class Canvas {
     this.pane = new Pane()
 
     this.controledParams = {
-      alpha: 1
+      alpha: 1,
+      progress: 0
     }
 
     this.pane.addBinding(this.controledParams, 'alpha', {
+      min: 0,
+      max: 1,
+      step: 0.01
+    })
+
+    this.pane.addBinding(this.controledParams, 'progress', {
       min: 0,
       max: 1,
       step: 0.01
