@@ -16,7 +16,12 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "@barba/core": "^2.9.7",
+    "@barba/core": "^2.10.0",
+    "@barba/prefetch": "^2.2.0",
+    "@tweakpane/core": "^2.0.4",
+    "@types/lodash": "^4.17.6",
+    "@types/normalize-wheel": "^1.0.4",
+    "@types/three": "^0.166.0",
     "autoprefixer": "^10.4.15",
     "directory-crawler": "^0.0.6",
     "events": "^3.3.0",

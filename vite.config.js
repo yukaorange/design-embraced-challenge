@@ -13,7 +13,6 @@ const configs = {
   meta: {}
 }
 
-
 // JSONファイルを読み込むための関数（./src/config/*.jsonでの利用を想定）
 const readConfigJSONFile = filePath => {
   return new Promise(async resolve => {
@@ -52,9 +51,7 @@ export default defineConfig(async () => {
       }
     },
     plugins: [
-      // HTMLソースを minify する。
-      // ◆ build -> minifyした後にprettierで整形（WordPress等の作業をしやすくする目的）
-      // ◆ production -> minifyだけを行う（静的サイトとしてデプロイを前提とするため。）
+      // production -> minifyだけを行う（静的サイトとしてデプロイを前提とするため。）
       ViteMinifyPlugin(),
       // 共通パーツを読み込むための記述
       // partialDirectoryで指定したディレクトリのパーツが読み込まれる。
@@ -78,11 +75,10 @@ export default defineConfig(async () => {
       glsl()
     ],
     resolve: {
-      // src/assets/scss を @ として読み込むことができる。
-      // SCSSファイルで外部ファイルを読み込むときに活用すると便利。
+      // src/assets/scss を @ として読み込むことができる。SCSSファイルで外部ファイルを読み込むときに活用すると便利。
       alias: {
         '@': resolve(__dirname, 'src/assets/scss'),
-        '@js': resolve(__dirname, 'src/assets/js'),
+        '@ts': resolve(__dirname, 'src/assets/ts')
       }
     }
   }

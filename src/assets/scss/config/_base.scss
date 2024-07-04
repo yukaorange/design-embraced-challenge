@@ -8,10 +8,9 @@
 
   --header-height: 8rem; //this value will be changed by js
 
-  --inner: calc(var(--vw) - var(--vw) / 24 * 2);
+  --inner: calc(var(--vw) - 26.6rem);
 
-  --col: calc((var(--vw)) / 28);
-
+  --col: calc((var(--vw) - 26.6rem) / 28);
   --margin: 4rem;
 
   --delay: 0.2s;
@@ -21,14 +20,13 @@
 
 @include mq(sp) {
   :root {
-    --inner: calc(var(--vw) - var(--vw) / 24 * 2);
-    --col: calc((var(--vw)) / 24);
+    --inner: calc(var(--vw) - 4rem);
+    --col: calc((var(--vw) - 4rem) / 16);
   }
 }
 
 ::-webkit-scrollbar {
 }
-
 ::-webkit-scrollbar-track {
   background-color: #ccc;
 }
@@ -42,6 +40,8 @@ html {
   scrollbar-width: thin; //webkit
   scrollbar-color: #444 #ccc; //webkit
   min-height: 100vh;
+
+  overscroll-behavior-y: none;
 }
 
 @include mq(sp) {
@@ -51,12 +51,23 @@ html {
 }
 
 body {
-  color: var(--black-1);
-  font-size: 1.6rem;
+  font-size: var(--font-size-base);
   line-height: 1.5;
   letter-spacing: 0.1em;
 
-  font-family: "Noto Sans JP", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+  font-family:
+    "Noto Sans JP",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 p,
@@ -146,6 +157,10 @@ ol {
   list-style: none;
 }
 
+button {
+  touch-action: manipulation;
+}
+
 // SVGスプライトのためのスタイル
 .use-sprite {
   position: absolute;
@@ -156,25 +171,8 @@ ol {
   }
 }
 
-._en {
-  font-family:
-    "Jost",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
-}
-
-._serif {
-  font-family: "Noto Serif JP", "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho",
-    system-ui, serif;
+* {
+  min-inline-size: 0;
 }
 
 //font-size
@@ -214,12 +212,12 @@ ol {
   --white-1: #ffffff;
   --white-2: rgba(255, 255, 255, 0.7);
   --white-3: rgba(255, 249, 245, 0.8);
-  --black-1: #4c4c4c;
-  --black-2: rgba(0, 0, 0, 0.72);
-  --black-3: rgba(0, 0, 0, 0.5);
+  --black-1: #202020;
+  --black-2: rgba(24, 23, 23, 0.72);
+  --black-3: rgba(37, 37, 37, 0.5);
   --black-4: rgba(0, 0, 0, 0.3);
   --black-5: rgba(0, 0, 0, 0.1);
-  --gray-1: rgba(204, 214, 214, 0.16);
+  --gray-1: #7e7f97;
   --gray-2: #d8d8d8;
   --gray-3: #f2f2f2;
   --gray-4: #f5f5f5;
@@ -235,11 +233,11 @@ ol {
   --green-3: #66bb6a;
   --green-4: #4caf50;
   --green-5: #388e3c;
-  --blue-1: #12899f;
-  --blue-2: #4e8088;
-  --blue-3: #195077;
-  --blue-4: #d5e5e8;
-  --blue-5: #188398;
+  --blue-1: #393fc8;
+  --blue-2: #64b5f6;
+  --blue-3: #42a5f5;
+  --blue-4: #2196f3;
+  --blue-5: #1976d2;
   --yellow-1: #f9c767;
   --yellow-2: #fff176;
   --yellow-3: #ffee58;
@@ -250,8 +248,6 @@ ol {
   --brown-3: #795548;
   --brown-4: #6d4c41;
   --brown-5: #5d4037;
-  --baige-1: #efece8;
-  --baige-2: #f5ece3;
 }
 
 // easing

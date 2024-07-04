@@ -7,39 +7,89 @@
   right: calc(var(--col) * 1);
 }
 
-.drawer-button__inner {
+.drawer-button__bars {
   display: grid;
+  row-gap: 1rem;
+  width: 5rem;
+  height: 2.5rem;
+  position: relative;
+  z-index: 0;
 }
 
-.drawer-button__row {
+.drawer-button__bar {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--black-1);
+  width: 5rem;
+  transition-property: transform;
+  transition-duration: 0.2s;
+}
+
+.drawer-button__bar:nth-child(1) {
+  top: 0;
+}
+.drawer-button__bar:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.drawer-button__bar:nth-child(3) {
+  bottom: 0;
+}
+
+.drawer-button[aria-expanded="true"] .drawer-button__bar:nth-child(1) {
+  transform: rotate(45deg);
+  top: 50%;
+}
+
+.drawer-button[aria-expanded="true"] .drawer-button__bar:nth-child(2) {
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+.drawer-button[aria-expanded="true"] .drawer-button__bar:nth-child(3) {
+  transform: rotate(-45deg);
+  bottom: 50%;
+}
+
+.drawer-button__inner {
+  margin-top: 0.6rem;
+  display: grid;
+  justify-items: center;
+  position: relative;
+  z-index: 0;
+  height: 2rem;
   overflow: hidden;
-  grid-row: 1/1;
-  grid-column: 1/1;
 }
 
 .drawer-button[aria-expanded="true"] .drawer-button__text--menu {
-  translate: 0 100%;
+  translate: -50% 100%;
 }
 
 .drawer-button[aria-expanded="false"] .drawer-button__text--menu {
-  translate: 0 0;
+  translate: -50% 0;
 }
 
 .drawer-button[aria-expanded="false"] .drawer-button__text--close {
-  translate: 0 100%;
+  translate: -50% 100%;
 }
 
 .drawer-button[aria-expanded="true"] .drawer-button__text--close {
-  translate: 0 0;
+  translate: -50% 0;
 }
 
 .drawer-button__text {
   transition-property: translate;
   transition-duration: 0.3s;
-  font-size: var(--font-size-2);
+  font-size: var(--font-size-small-1);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--black-1);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
 }
 
 .drawer-button__text--menu {
@@ -48,51 +98,110 @@
 .drawer-button__text--close {
 }
 
+.drawer-button__text__inner {
+  position: relative;
+}
+
 @include mq(sp) {
   .drawer-button {
     position: fixed;
-    top: 1.6rem;
+    top: 2rem;
     z-index: 10000;
     right: calc(var(--col) * 1);
   }
 
-  .drawer-button__inner {
+  .drawer-button__bars {
     display: grid;
+    row-gap: 1rem;
+    width: 5rem;
+    height: 2.5rem;
+    position: relative;
+    z-index: 0;
   }
 
-  .drawer-button__row {
+  .drawer-button__bar {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 0.1rem;
+    background-color: var(--black-1);
+    width: 5rem;
+    transition-property: transform;
+    transition-duration: 0.2s;
+  }
+
+  .drawer-button__bar:nth-child(1) {
+    top: 0;
+  }
+  .drawer-button__bar:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .drawer-button__bar:nth-child(3) {
+    bottom: 0;
+  }
+
+  .drawer-button[aria-expanded="true"] .drawer-button__bar:nth-child(1) {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  .drawer-button[aria-expanded="true"] .drawer-button__bar:nth-child(2) {
+    opacity: 0;
+    transform: rotate(-45deg);
+  }
+
+  .drawer-button[aria-expanded="true"] .drawer-button__bar:nth-child(3) {
+    transform: rotate(-45deg);
+    bottom: 50%;
+  }
+
+  .drawer-button__inner {
+    margin-top: 0.6rem;
+    display: grid;
+    justify-items: center;
+    position: relative;
+    z-index: 0;
+    height: 2rem;
     overflow: hidden;
-    grid-row: 1/1;
-    grid-column: 1/1;
   }
 
   .drawer-button[aria-expanded="true"] .drawer-button__text--menu {
-    translate: 0 100%;
+    translate: -50% 100%;
   }
 
   .drawer-button[aria-expanded="false"] .drawer-button__text--menu {
-    translate: 0 0;
+    translate: -50% 0;
   }
 
   .drawer-button[aria-expanded="false"] .drawer-button__text--close {
-    translate: 0 100%;
+    translate: -50% 100%;
   }
 
   .drawer-button[aria-expanded="true"] .drawer-button__text--close {
-    translate: 0 0;
+    translate: -50% 0;
   }
 
   .drawer-button__text {
     transition-property: translate;
     transition-duration: 0.3s;
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-small-1);
     text-transform: uppercase;
     letter-spacing: 0.15em;
+    color: var(--black-1);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 1;
   }
 
   .drawer-button__text--menu {
   }
 
   .drawer-button__text--close {
+  }
+
+  .drawer-button__text__inner {
+    position: relative;
   }
 }

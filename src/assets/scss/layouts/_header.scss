@@ -1,1 +1,13 @@
 @use "./../mixin/" as *;
+
+.header {
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  padding-left: calc(var(--col) * 1);
+}
+
+.header__inner {
+}
+
+.header__logo {
+}

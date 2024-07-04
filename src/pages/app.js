@@ -1,1 +1,1 @@
-export * from "@js/index";
+export * from "@ts/index";

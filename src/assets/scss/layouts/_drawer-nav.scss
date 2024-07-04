@@ -1,4 +1,5 @@
 @use "./../mixin/" as *;
+
 .drawer-nav {
   display: none;
 }
@@ -18,7 +19,8 @@
 .drawer-nav__inner {
   min-height: calc(100svh + 1px);
   display: grid;
-  place-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 .drawer-nav__close {
