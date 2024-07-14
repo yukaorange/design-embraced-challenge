@@ -4,7 +4,11 @@ import Logger from '@ts/common/utility/Logger'
 
 import * as THREE from 'three'
 
-import Plane, { TOption } from '@ts/webgl/Home/Plane'
+import {
+  GarellyManager,
+  T_Option,
+  T_GarellyManager
+} from '@ts/webgl/Home/garelly/Garelly'
 
 import { TSizes } from '@ts/webgl'
 
@@ -19,35 +23,7 @@ export default class Home {
   private sizes: TSizes
   private device: string
 
-  private plane: Plane | null = null
-
-  private x: {
-    current: number
-    target: number
-    lerp: number
-  }
-
-  private y: {
-    current: number
-    target: number
-    lerp: number
-  }
-
-  private scrollCurrent: {
-    x: number
-    y: number
-  }
-
-  private scroll: {
-    x: number
-    y: number
-  }
-
-  private speed: {
-    current: number
-    target: number
-    lerp: number
-  }
+  private garellyManager: GarellyManager | null = null
 
   constructor({ scene, sizes, device }: TPage) {
     this.scene = scene
@@ -56,50 +32,16 @@ export default class Home {
 
     this.device = device
 
-    this.x = {
-      current: 0,
-      target: 0,
-      lerp: 0.1
-    }
-
-    this.y = {
-      current: 0,
-      target: 0,
-      lerp: 0.1
-    }
-
-    //scrollCurrent is necessary to memolize touchstart position.
-    this.scrollCurrent = {
-      x: 0,
-      y: 0
-    }
-
-    this.scroll = {
-      x: 0,
-      y: 0
-    }
-
-    this.speed = {
-      current: 0,
-      target: 0,
-      lerp: 0.1
-    }
-
-    this.createPlane()
-
-    if (this.plane) {
-      this.scene.add(this.plane.getMesh())
-    }
+    this.createGarelly()
 
     this.show()
-
-    Logger.log(`from Webgl Home.ts create ${this.plane?.getMesh()}`)
   }
 
-  private createPlane() {
-    this.plane = new Plane({
+  private createGarelly() {
+    this.garellyManager = new GarellyManager({
       sizes: this.sizes,
-      device: this.device
+      device: this.device,
+      scene: this.scene
     })
   }
 
@@ -108,31 +50,27 @@ export default class Home {
    */
 
   public show() {
-    this.plane?.show()
+    this.garellyManager?.show()
   }
 
-  public hide() {
-    this.plane?.hide()
-  }
+  public hide() {}
 
   /**
    * events
    */
-  public onResize(values: TOption) {
-    this.plane?.onResize(values)
+  public onResize(params: T_Option) {
+    this.garellyManager?.onResize(params)
   }
 
   /**
    * update
    */
-  public update(params: any) {
-    this.plane?.update()
+  public update() {
+    this.garellyManager?.update()
   }
 
   /**
    * destroy
    */
-  public destroy() {
-    this.plane && this.scene.remove(this.plane.getMesh())
-  }
+  public destroy() {}
 }

@@ -1,7 +1,6 @@
 import GSAP from 'gsap'
 import * as THREE from 'three'
 
-import { Pane } from 'tweakpane'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import Home from '@ts/webgl/Home'
@@ -39,7 +38,6 @@ export default class Canvas {
   private scene: THREE.Scene | null
   private camera: THREE.PerspectiveCamera | null
   private controls: OrbitControls | null
-  private pane: Pane | null
   private paneParams: { [key: string]: any } | null = null
 
   constructor({ template, dom, device }: TCanvas) {
@@ -55,7 +53,6 @@ export default class Canvas {
     this.scene = null
     this.camera = null
     this.controls = null
-    this.pane = null
 
     //parameter
     this.sizes = {
@@ -80,9 +77,9 @@ export default class Canvas {
 
     this.createCamera()
 
-    this.createPane()
+    // this.createControls()
 
-    this.createControls()
+    this.onResize({ device: this.device })
 
     this.createHome()
   }
@@ -93,7 +90,7 @@ export default class Canvas {
       antialias: true
     })
 
-    this.renderer.setClearColor(0x000000, 0)
+    this.renderer.setClearColor(0xeeeeee, 1)
 
     this.renderer.setPixelRatio(window.devicePixelRatio)
 
@@ -115,20 +112,6 @@ export default class Canvas {
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
 
     this.camera.position.z = 5
-  }
-
-  private createPane() {
-    this.pane = new Pane()
-
-    this.paneParams = {
-      alpha: 1
-    }
-
-    this.pane.addBinding(this.paneParams, 'alpha', {
-      min: 0,
-      max: 1,
-      step: 0.01
-    })
   }
 
   private createControls() {
@@ -155,17 +138,15 @@ export default class Canvas {
    * events
    */
 
-  public onPreloaded() {
-    this.onChangeEnd(this.template)
-  }
-
   public onChangeStart(template: string) {
     this.template = template
   }
 
   public onChangeEnd(template: string) {}
 
-  public onResize({ device }: { device: string }) {
+  public onResize(parameter: { device: string }) {
+    const { device } = parameter
+
     this.device = device
 
     this.updateScale()
@@ -179,15 +160,15 @@ export default class Canvas {
   }
 
   private updateScale() {
-    this.renderer?.setSize(window.innerWidth, window.innerHeight) //expand canvas to full screen.
+    this.renderer?.setSize(window.innerWidth, window.innerHeight)
 
     const aspect: number = window.innerWidth / window.innerHeight
 
-    const fov: number = this.camera ? this.camera?.fov * (Math.PI / 180) : 0 // default camera.fov = 45deg. result fov is in radians. (1/4 PI rad)
+    const fov: number = this.camera ? this.camera?.fov * (Math.PI / 180) : 0
 
     const height: number = this.camera
       ? 2 * Math.tan(fov / 2) * this.camera?.position.z
-      : 0 //z = 5 is setted at this.createCamera
+      : 0 //default z = 5
 
     const width: number = height * aspect //viewport size in screen.
 
@@ -204,37 +185,10 @@ export default class Canvas {
     }
   }
 
-  public onTouchDown(event: TouchEvent | MouseEvent) {
-    this.isTouchDown = true
-
-    this.x.start = 'touches' in event ? event.touches[0].clientX : event.clientX
-    this.y.start = 'touches' in event ? event.touches[0].clientY : event.clientY
-
-    const positions = {
-      x: this.x,
-      y: this.y
-    }
-  }
-
-  public onTouchMove(event: TouchEvent | MouseEvent) {
-    if (!this.isTouchDown) return
-
-    const x = 'touches' in event ? event.touches[0].clientX : event.clientX
-    const y = 'touches' in event ? event.touches[0].clientY : event.clientY
-
-    this.x.end = x
-    this.y.end = y
-
-    const positions = {
-      x: this.x,
-      y: this.y
-    }
-  }
-
   /**loop */
 
-  public update(params: any) {
-    this.home?.update(params)
+  public update() {
+    this.home?.update()
 
     this.renderer?.render(
       this.scene as THREE.Scene,

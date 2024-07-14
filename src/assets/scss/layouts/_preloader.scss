@@ -23,19 +23,18 @@
 
 .preloader__progress {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
+  bottom: 3.2rem;
+  right: calc(var(--col) * 1);
   display: grid;
   grid-auto-flow: column;
   justify-content: start;
   align-items: center;
 
-  color: var(--white-1);
+  color: var(--black-1);
 }
 
 .preloader__count {
-  --size: 3.2rem;
+  --size: 2.4rem;
   --font-size: calc(var(--size) * 0.75);
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -96,7 +95,7 @@
 .preloader__animation-layer {
   position: absolute;
   inset: 0;
-  background-color: var(--black-1);
+  background-color: var(--gray-2);
   z-index: -1;
 }
 

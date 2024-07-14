@@ -31,7 +31,7 @@ export default class Transition {
 
             return this.page.destroy()
           },
-          enter: data => {
+          enter: (data: any) => {
             Logger.log(`from Transition.ts / page enter`)
 
             const parser = new DOMParser()
@@ -46,8 +46,6 @@ export default class Transition {
 
             this.page.create()
 
-            console.log(this.page)
-
             metaManager.updateMetaTags()
 
             return this.page.set()
@@ -58,7 +56,7 @@ export default class Transition {
         }
       ],
       views: [],
-      debug: true
+      debug: false
     })
 
     Barba.hooks.after(() => {

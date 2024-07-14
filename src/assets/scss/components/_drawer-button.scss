@@ -2,7 +2,7 @@
 
 .drawer-button {
   position: fixed;
-  top: 2.4rem;
+  top: 3.2rem;
   z-index: 10000;
   right: calc(var(--col) * 1);
 }
@@ -84,7 +84,7 @@
   transition-duration: 0.3s;
   font-size: var(--font-size-small-1);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.07em;
   color: var(--black-1);
   position: absolute;
   bottom: 0;

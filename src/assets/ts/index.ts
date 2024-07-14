@@ -5,6 +5,7 @@ import Logger from '@ts/common/utility/Logger'
 
 import Assets from '@ts/common/singleton/Assets'
 import InteractionState from '@ts/common/singleton/InteractionState'
+import ScrollAnimator from '@ts/common/singleton/ScrollAnimator'
 import MetaManager from '@ts/common/utility/MetaManager'
 import BreakpointsObserver from '@ts/common/utility/BreakpointsObserver'
 import UserAgent from '@ts/common/utility/UserAgent'
@@ -22,8 +23,6 @@ import Transition from '@ts/common/ui/Transition'
 import Canvas, { TCanvas } from '@ts/webgl/index'
 
 import Home from '@ts/pages/Home/Home'
-// import About from '@ts/pages/about/About'
-// import Page3 from './pages/Page3/Page3';
 
 class App {
   //information
@@ -38,6 +37,7 @@ class App {
 
   //singleton
   private interactionState: InteractionState
+  private scrollAnimator: ScrollAnimator
   private assets: Assets
 
   //webgl experience
@@ -77,6 +77,7 @@ class App {
 
     //singleton
     this.assets = Assets.getInstance()
+    this.scrollAnimator = ScrollAnimator.getInstance()
     this.interactionState = InteractionState.getInstance()
 
     //webgl experience
@@ -93,9 +94,6 @@ class App {
     this.createDrawerNavigation()
     this.createHeader()
     this.createPages()
-
-    //webgl experience
-    this.createCanvas()
 
     //page transition
     this.createTransition()
@@ -229,6 +227,8 @@ class App {
     this.preloader?.once('loaded', async () => {
       await this.preloader?.hideAnimation()
 
+      this.createCanvas()
+
       this.update()
 
       this.page.show()
@@ -245,7 +245,13 @@ class App {
    * update
    */
   private update() {
-    this.canvas?.update({})
+    this.interactionState?.update() //only update in App class.
+
+    this.scrollAnimator?.update() //only update in App class.
+
+    this.page?.update()
+
+    this.canvas?.update()
 
     this.frame = window.requestAnimationFrame(this.update.bind(this))
   }

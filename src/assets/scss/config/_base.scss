@@ -10,7 +10,7 @@
 
   --inner: calc(var(--vw) - 26.6rem);
 
-  --col: calc((var(--vw) - 26.6rem) / 28);
+  --col: calc((var(--vw)) / 28);
   --margin: 4rem;
 
   --delay: 0.2s;
@@ -21,7 +21,7 @@
 @include mq(sp) {
   :root {
     --inner: calc(var(--vw) - 4rem);
-    --col: calc((var(--vw) - 4rem) / 16);
+    --col: calc((var(--vw)) / 20);
   }
 }
 
@@ -51,6 +51,11 @@ html {
 }
 
 body {
+  overflow: hidden;
+  height: 0;
+
+  background-color: var(--gray-2);
+
   font-size: var(--font-size-base);
   line-height: 1.5;
   letter-spacing: 0.1em;
@@ -218,7 +223,7 @@ button {
   --black-4: rgba(0, 0, 0, 0.3);
   --black-5: rgba(0, 0, 0, 0.1);
   --gray-1: #7e7f97;
-  --gray-2: #d8d8d8;
+  --gray-2: #eeeeee;
   --gray-3: #f2f2f2;
   --gray-4: #f5f5f5;
   --gray-5: #f7f7f7;

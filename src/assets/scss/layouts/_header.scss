@@ -1,13 +1,21 @@
 @use "./../mixin/" as *;
 
 .header {
-  padding-top: 1.6rem;
-  padding-bottom: 1.6rem;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 2.4rem;
+  padding-bottom: 2rem;
   padding-left: calc(var(--col) * 1);
+  padding-right: calc(var(--col) * 1);
 }
 
 .header__inner {
 }
 
 .header__logo {
+  text-transform: uppercase;
+  line-height: 1;
 }

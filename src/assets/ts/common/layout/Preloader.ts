@@ -10,7 +10,10 @@ import Logger from '@ts/common/utility/Logger'
  * Loader
  */
 type TLoader = {
-  loadAssets: (assets: HTMLImageElement[], indicator: HTMLElement) => Promise<void>
+  loadAssets: (
+    assets: HTMLImageElement[],
+    indicator: HTMLElement
+  ) => Promise<void>
   // onAssetLoaded: (indicator: HTMLElement) => void
 }
 
@@ -33,11 +36,14 @@ export class Loader implements TLoader {
     this.textureLoader = new THREE.TextureLoader()
   }
 
-  public async loadAssets(assets: any[], indicator: HTMLElement): Promise<void> {
+  public async loadAssets(
+    assets: any[],
+    indicator: HTMLElement
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
       this.totalLength = assets.length
 
-      assets.forEach((imageDom) => {
+      assets.forEach(imageDom => {
         const image = new Image()
 
         const id = imageDom.getAttribute('data-id')
@@ -53,12 +59,14 @@ export class Loader implements TLoader {
 
           this.textures[id] = texture
 
-          Logger.log(`from Preloader.ts / loaded $id:${id} | texture ${texture}`)
+          Logger.log(
+            `from Preloader.ts / loaded $id:${id} | texture ${texture}`
+          )
 
           this.onAssetLoaded(indicator, resolve)
         }
 
-        image.onerror = (e) => {
+        image.onerror = e => {
           Logger.error(`from Preloader.ts / failed to load ${image.src}`)
 
           reject(e)
@@ -84,9 +92,13 @@ export class Loader implements TLoader {
       '[data-ui="preloader-count-digit-hundred"]'
     ) as HTMLElement
 
-    const ten = indicator.querySelector('[data-ui="preloader-count-digit-ten"]') as HTMLElement
+    const ten = indicator.querySelector(
+      '[data-ui="preloader-count-digit-ten"]'
+    ) as HTMLElement
 
-    const one = indicator.querySelector('[data-ui="preloader-count-digit-one"]') as HTMLElement
+    const one = indicator.querySelector(
+      '[data-ui="preloader-count-digit-one"]'
+    ) as HTMLElement
 
     let hundreds: number = Math.floor((percent / 100) % 100)
 
@@ -119,7 +131,10 @@ type TAnimator = {
 }
 
 export class Animator implements TAnimator {
-  public async hideAnimation(elements: any, resolve: () => void): Promise<void> {
+  public async hideAnimation(
+    elements: any,
+    resolve: () => void
+  ): Promise<void> {
     GSAP.to(elements, {
       autoAlpha: 0,
       duration: 1,
@@ -127,12 +142,12 @@ export class Animator implements TAnimator {
       onUpdate: function () {
         const progress = this.progress()
 
-        if (progress > 0.8) {
+        if (progress > 0.5) {
           // this logic makes me can modify animation finally.
 
           resolve()
         }
-      },
+      }
       // onComplete: () => {
       //   resolve()
       // },
@@ -149,8 +164,8 @@ export default class Preloader extends Component {
       element: '[data-ui="preloader"]',
       elements: {
         count: '[data-ui="preloader-count"]',
-        assets: '[data-ui="preloader-assets"]',
-      },
+        assets: '[data-ui="preloader-assets"]'
+      }
     })
 
     Logger.log(
@@ -173,7 +188,7 @@ export default class Preloader extends Component {
   }
 
   public async hideAnimation() {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>(resolve => {
       const element = this.element
 
       this.animator.hideAnimation(element, resolve)

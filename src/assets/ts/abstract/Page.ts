@@ -144,7 +144,7 @@ export default abstract class Page {
 
     this.animationIn.to(this.element, {
       autoAlpha: 1,
-      duration: 0.2,
+      duration: 1,
       ease: 'power2.out',
       onStart: () => {
         Logger.log(`from Page.ts@${this.id} / page base show animation start`)
@@ -154,7 +154,7 @@ export default abstract class Page {
     this.animationIn.to(this.elements.animationText, {
       autoAlpha: 1,
       delay: 0.2,
-      duration: 0.5,
+      duration: 0.8,
       ease: 'power2.out',
       onStart: () => {}
     })
