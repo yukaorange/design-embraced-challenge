@@ -1,0 +1,71 @@
+@use "./../mixin/" as *;
+
+.navigator {
+  --size: 5rem;
+  position: fixed;
+  z-index: 10;
+  right: calc(var(--col) * 1);
+  top: 50%;
+  width: var(--size);
+  height: var(--size);
+  translate: -50% -50%;
+  border: 0.1rem solid var(--gray-3);
+  border-radius: 50%;
+}
+
+.navigator__dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  rotate: calc(360deg * var(--progress));
+  &::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--size) / 2 * -1);
+    left: 0;
+    translate: -50% -50%;
+    width: 0.2rem;
+    height: 0.2rem;
+    border-radius: 50%;
+    background-color: var(--black-1);
+  }
+}
+
+@include mq(sp) {
+  .navigator {
+    --size: 3rem;
+    position: fixed;
+    z-index: 10;
+    top: auto;
+    bottom: 2rem;
+    right: auto;
+    left: calc((var(--col) * 0.5) + var(--size));
+    width: var(--size);
+    height: var(--size);
+    translate: -50% -50%;
+    border: 0.1rem solid var(--gray-3);
+    border-radius: 50%;
+  }
+
+  .navigator__dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    rotate: calc(360deg * var(--progress));
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc(var(--size) / 2 * -1);
+      left: 0;
+      translate: -50% -50%;
+      width: 0.2rem;
+      height: 0.2rem;
+      border-radius: 50%;
+      background-color: var(--black-1);
+    }
+  }
+}

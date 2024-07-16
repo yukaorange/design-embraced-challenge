@@ -57,6 +57,7 @@ export class Media {
   private offsetHeight: number = 0
   private x: number = 0
   private y: number = 0
+  private originalScale: THREE.Vector3 | null = null
 
   private mousePosition: { x: number; y: number } = { x: 0, y: 0 }
 
@@ -219,6 +220,43 @@ export class Media {
   }
 
   /**
+   * aniamtion
+   */
+  public zoomIn() {
+    if (this.mesh && this.material) {
+      GSAP.to(this.mesh.scale, {
+        x: this.mesh.scale.x * 1.5,
+        y: this.mesh.scale.y * 1.5,
+        duration: 1
+      })
+
+      GSAP.to(this.material.uniforms.uOpacity, { value: 1, duration: 0.5 })
+    }
+  }
+
+  public zoomOut() {
+    if (this.mesh && this.originalScale) {
+      GSAP.to(this.mesh.scale, {
+        x: this.originalScale.x,
+        y: this.originalScale.y,
+        duration: 1
+      })
+    }
+  }
+
+  public fadeOut() {
+    if (this.material) {
+      GSAP.to(this.material.uniforms.uOpacity, { value: 0, duration: 0.5 })
+    }
+  }
+
+  public fadeIn() {
+    if (this.material) {
+      GSAP.to(this.material.uniforms.uOpacity, { value: 1, duration: 0.5 })
+    }
+  }
+
+  /**
    * update
    */
 
@@ -232,6 +270,8 @@ export class Media {
 
     this.mesh.scale.x = this.sizes.width * this.width ?? 0
     this.mesh.scale.y = this.sizes.height * this.height ?? 0
+
+    this.originalScale = this.mesh.scale.clone()
 
     this.polygonAspect = this.mesh.scale.x / this.mesh.scale.y
 

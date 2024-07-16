@@ -3,17 +3,59 @@
 .indicator {
   position: fixed;
   z-index: 0;
-  width: 50rem;
   height: 0.1rem;
-  right: calc(var(--col) * 2);
+  right: calc(var(--col) * 1);
   bottom: 8rem;
-  // background-color: var(--gray-1);
+}
+
+.indicator__inner {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.indicator__text {
+  font-size: var(--font-size-small-1);
 }
 
 .indicator__speed {
   --speed: 0;
-  width: 100%;
-  height: 100%;
+  width: calc(var(--col) * 1.25);
+  height: 0.1rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
   background-color: var(--gray-1);
-  transform: scaleX(var(--speed));
+  transform: scaleX(clamp(-1, calc(var(--speed)), 1));
+  transform-origin: 0 0;
+}
+
+@include mq(sp) {
+  .indicator {
+    position: fixed;
+    z-index: 0;
+    height: 0.1rem;
+    right: calc(var(--col) * 1);
+    bottom: 8rem;
+  }
+
+  .indicator__inner {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+
+  .indicator__text {
+    font-size: var(--font-size-small-1);
+  }
+
+  .indicator__speed {
+    --speed: 0;
+    width: calc(var(--col) * 1.25);
+    height: 0.1rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--gray-1);
+    transform: scaleX(clamp(-1, (calc(var(--speed) * 100)), 1));
+    transform-origin: 0 0;
+  }
 }

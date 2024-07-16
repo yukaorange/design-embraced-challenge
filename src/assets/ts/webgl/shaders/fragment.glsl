@@ -32,8 +32,5 @@ void main() {
 
   vec4 texColor = texture2D(uTexture, newUv);
 
-  vec3 testColor = vec3(vDistance, 0.0, 0.0);
-
   gl_FragColor = vec4(texColor.rgb, 1.0);
-  // gl_FragColor = vec4(testColor.rgb, 1.0);
 }

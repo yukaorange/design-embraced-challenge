@@ -83,12 +83,18 @@ export default class InteractionState {
     this.scrollAmount = window.scrollY
   }
 
-  private updateMousePosition(event: MouseEvent): void {
-    this.mousePosition = { x: event.clientX, y: event.clientY }
+  private updateMousePosition(event: MouseEvent | TouchEvent): void {
+    if (event instanceof MouseEvent) {
+      this.mousePosition = { x: event.clientX, y: event.clientY }
+    } else if (event instanceof TouchEvent && event.touches.length > 0) {
+      const touch = event.touches[0]
+      this.mousePosition = { x: touch.clientX, y: touch.clientY }
+    }
   }
 
   private updateTouchCoordinates(event: TouchEvent): void {
     this.updateTouchState(event.type)
+    this.updateMousePosition(event)
 
     if (event.touches.length > 0) {
       const touch = event.touches[0]

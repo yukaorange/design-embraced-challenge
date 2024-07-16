@@ -195,14 +195,14 @@ export class Garelly {
       onUpdate: () => {},
       onComplete: () => {
         this.accumulateDelta = targetDelta
-        this.lastScrollTime = Date.now()
+        this.lastScrollTime = performance.now()
         this.isSnapping = false
       }
     })
   }
 
   update() {
-    const currentTime = Date.now()
+    const currentTime = performance.now()
 
     this.delta = this.interactionState?.getWheelDelta() ?? 0
 
@@ -214,7 +214,7 @@ export class Garelly {
       return
     }
 
-    if (Math.abs(this.delta) > 1e-10) {
+    if (Math.abs(this.delta) > 1e-8) {
       this.lastScrollTime = currentTime
 
       if (this.isSnapping) {

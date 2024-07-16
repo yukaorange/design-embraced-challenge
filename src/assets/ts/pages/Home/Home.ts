@@ -3,6 +3,7 @@ import Logger from '@ts/common/utility/Logger'
 import GSAP from 'gsap'
 import { GalleryManager } from '@ts/pages/Home/component/Garelly/Garelly'
 import { IndicatorManager } from '@ts/pages/Home/component/indicator/Indicator'
+import { NavigatorManager } from '@ts/pages/Home/component/navigator/navigator'
 import InteractionState from '@ts/common/singleton/InteractionState'
 
 type TOptions = {
@@ -12,6 +13,7 @@ type TOptions = {
 export default class Home extends Page {
   private garellyManager: GalleryManager | null = null
   private indicatorManager: IndicatorManager | null = null
+  private navigatorManager: NavigatorManager | null = null
 
   constructor(params: TOptions) {
     super({
@@ -28,6 +30,8 @@ export default class Home extends Page {
     this.garellyManager = new GalleryManager()
 
     this.indicatorManager = new IndicatorManager()
+
+    this.navigatorManager = new NavigatorManager()
   }
 
   /**
@@ -61,5 +65,9 @@ export default class Home extends Page {
     this.garellyManager?.update()
 
     this.indicatorManager?.update()
+
+    this.navigatorManager?.update(
+      this.garellyManager?.getNormalizeAmount() as number
+    )
   }
 }

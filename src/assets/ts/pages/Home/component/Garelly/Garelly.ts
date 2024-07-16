@@ -6,6 +6,8 @@ import GSAP from 'gsap'
 
 import { Media } from './Media'
 
+import * as THREE from 'three'
+
 export class GarellyElement extends Component {
   constructor() {
     super({
@@ -26,6 +28,7 @@ export class Garelly {
   private itemLength: number = 0
   private itemHeight: number = 0
   private totalHeight: number = 0
+  private normalizeAmount: number = 0
   private snapDuration: number = 0.4
   private lastScrollTime: number = Date.now()
   private snapDelay: number = 500
@@ -56,6 +59,10 @@ export class Garelly {
         id: index
       })
     })
+  }
+
+  public getNormalizeAmount() {
+    return this.normalizeAmount
   }
 
   private calculateDimention() {
@@ -91,7 +98,16 @@ export class Garelly {
         y += this.totalHeight
       }
 
-      media.update(y)
+      let progress = (y + this.itemHeight) / this.itemHeight - 1
+
+      progress = Math.max(-1, Math.min(1, progress))
+
+      const parameter = {
+        y: y,
+        progress: progress
+      }
+
+      media.update(parameter)
     })
   }
 
@@ -110,24 +126,24 @@ export class Garelly {
       ease: 'power2.in',
       onComplete: () => {
         this.accumulateDelta = targetDelta
-        this.lastScrollTime = Date.now()
+        this.lastScrollTime = performance.now()
         this.isSnapping = false
       }
     })
   }
 
   public update() {
-    const currentTime = Date.now()
+    const currentTime = performance.now()
 
     this.delta = this.interactionState?.getWheelDelta() ?? 0
 
     if (this.delta === 0) {
       this.updatePositions()
-
       return
     }
 
-    if (Math.abs(this.delta) > 1e-10) {
+    //inspect the delta to detamine if the user is scrolling
+    if (Math.abs(this.delta) > 1e-8) {
       this.lastScrollTime = currentTime
 
       if (this.isSnapping) {
@@ -144,13 +160,15 @@ export class Garelly {
       }
     }
 
-    // Logger.log(`from Garelly.ts(dom) dom:${this.accumulateDelta}`)
-
+    //loop the garelly
     if (this.accumulateDelta < 0) {
       this.accumulateDelta += this.totalHeight
     } else if (this.accumulateDelta > this.totalHeight) {
       this.accumulateDelta -= this.totalHeight
     }
+
+    //normalize accumulate amount
+    this.normalizeAmount = this.accumulateDelta / this.totalHeight
 
     this.updatePositions()
   }
@@ -173,5 +191,9 @@ export class GalleryManager {
 
   public onResize() {
     this.garelly.onResize()
+  }
+
+  public getNormalizeAmount() {
+    return this.garelly.getNormalizeAmount()
   }
 }

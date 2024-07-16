@@ -23,7 +23,20 @@ export class Media {
     this.element.style.transform = `translateY(${y}px)`
   }
 
-  public update(y: number) {
+  private updateDataProgress(progress: number) {
+    this.element.style.setProperty('--rotate-progress', `${progress}`)
+
+    this.element.style.setProperty(
+      '--translate-progress',
+      `${Math.abs(progress)}`
+    )
+  }
+
+  public update(parameter: { y: number; progress: number }) {
+    const { y, progress } = parameter
+
     this.updatePosition(y)
+
+    this.updateDataProgress(progress)
   }
 }

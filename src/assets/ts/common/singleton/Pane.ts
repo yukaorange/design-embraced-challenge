@@ -7,7 +7,7 @@ export default class DebugPane {
 
   private constructor() {
     this.pane = new Pane({
-      // expanded: false
+      expanded: false
     })
 
     this.params = {

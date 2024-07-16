@@ -23,7 +23,6 @@ void main() {
   vec3 pos = position;
 
   //----  mouse ----
-
   vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
 
   vec2 planePosition = mvPosition.xy;
