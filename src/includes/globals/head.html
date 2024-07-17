@@ -25,7 +25,10 @@
 
 <!-- OGP title -->
 {{#if page.pageTitle}}
-<meta property="og:title" content="{{page.pageTitle}}{{site.name_separate}}{{site.name}}" />
+<meta
+  property="og:title"
+  content="{{page.pageTitle}}{{site.name_separate}}{{site.name}}"
+/>
 {{else}}
 <meta property="og:title" content="{{site.name}}" />
 {{/if}}
