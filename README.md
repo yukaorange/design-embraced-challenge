@@ -5,6 +5,10 @@ webGL TypeScript
 I create an infinitely rotating slider using WebGL.
 I was fascinated by the polygon flip and appears to be rotating in a circular motion.
 
+# deploy
+
+https://design-embraced-challenge.vercel.app/
+
 # reference
 https://tympanus.net/codrops/2024/03/21/case-study-design-embraced-portfolio-2024/
 
