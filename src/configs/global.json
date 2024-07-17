@@ -7,7 +7,7 @@
     "description": "technical portfolio",
     "ogp": {
       "type": "website",
-      "image": "https://design-embraced-challenge.vercel.app//ogp.jpg"
+      "image": "https://design-embraced-challenge.vercel.app/ogp.jpg"
     },
     "twitter": {
       "card": "summary_large_image",
