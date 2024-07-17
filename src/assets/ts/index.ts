@@ -55,7 +55,7 @@ class App {
   private frame: any | null = null
 
   constructor() {
-    Logger.enable() //enable or disable
+    Logger.disable() //enable or disable
 
     //information
     this.content = document.querySelector('[data-ui="content"]') as HTMLElement

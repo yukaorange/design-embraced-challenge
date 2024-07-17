@@ -2,9 +2,9 @@
   "site": {
     "name": "design-enbraced",
     "name_separate": " | ",
-    "domain": "takaoka.com",
+    "domain": "https://design-embraced-challenge.vercel.app",
     "favicon": "/favicon.svg",
-    "description": "portfolio site.",
+    "description": "technical portfolio",
     "ogp": {
       "type": "website",
       "image": "/ogp.jpg"
