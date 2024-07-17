@@ -2,7 +2,7 @@
   "site": {
     "name": "design-embraced",
     "name_separate": " | ",
-    "domain": "https://design-embraced-challenge.vercel.app",
+    "domain": "design-embraced-challenge.vercel.app",
     "favicon": "/favicon.svg",
     "description": "technical portfolio",
     "ogp": {

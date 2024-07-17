@@ -35,6 +35,9 @@ export default class InteractionState {
     lerp: 0.1
   }
 
+  private targetMousePosition: { x: number; y: number } = { x: 0, y: 0 }
+  private mouseLerpFactor: number = 0.075
+
   private constructor() {
     this.addEventListeners()
 
@@ -60,22 +63,15 @@ export default class InteractionState {
 
   private addEventListeners(): void {
     window.addEventListener('scroll', this.updateScrollAmount.bind(this))
-
     window.addEventListener('mousedown', this.updateMousePosition.bind(this))
-
     window.addEventListener('mousemove', this.updateMousePosition.bind(this))
-
     window.addEventListener('mouseup', this.updateMousePosition.bind(this))
-
     window.addEventListener(
       'touchstart',
       this.updateTouchCoordinates.bind(this)
     )
-
     window.addEventListener('touchmove', this.updateTouchCoordinates.bind(this))
-
     window.addEventListener('touchend', this.updateTouchCoordinates.bind(this))
-
     window.addEventListener('wheel', this.updateWheel.bind(this))
   }
 
@@ -83,18 +79,13 @@ export default class InteractionState {
     this.scrollAmount = window.scrollY
   }
 
-  private updateMousePosition(event: MouseEvent | TouchEvent): void {
-    if (event instanceof MouseEvent) {
-      this.mousePosition = { x: event.clientX, y: event.clientY }
-    } else if (event instanceof TouchEvent && event.touches.length > 0) {
-      const touch = event.touches[0]
-      this.mousePosition = { x: touch.clientX, y: touch.clientY }
-    }
+  private updateMousePosition(event: MouseEvent): void {
+    this.mousePosition = { x: event.clientX, y: event.clientY }
+    this.targetMousePosition = { x: event.clientX, y: event.clientY }
   }
 
   private updateTouchCoordinates(event: TouchEvent): void {
     this.updateTouchState(event.type)
-    this.updateMousePosition(event)
 
     if (event.touches.length > 0) {
       const touch = event.touches[0]
@@ -104,13 +95,16 @@ export default class InteractionState {
         y: touch.clientY
       }
 
+      this.targetMousePosition = {
+        x: touch.clientX,
+        y: touch.clientY
+      }
+
       if (event.type === 'touchstart') {
         this.touchStartY = touch.clientY
-
         this.scroll.start = this.scroll.current
       } else if (event.type === 'touchmove' && this.touchStartY !== null) {
         const distance = this.touchStartY - touch.clientY
-
         this.scroll.target =
           this.scroll.start + distance * this.touchSensitivity
       }
@@ -139,7 +133,6 @@ export default class InteractionState {
     if (this.wheelTimeout === null) {
       this.wheelTimeout = window.setTimeout(() => {
         this.processWheelEvents()
-
         this.wheelTimeout = null
       }, this.wheelDebounceTime)
     }
@@ -150,14 +143,11 @@ export default class InteractionState {
 
     for (const event of this.wheelEvents) {
       const normalizedWheel = normalizeWheel(event)
-
       totalDelta += normalizedWheel.pixelY
     }
 
     const adjustedDelta = totalDelta * this.wheelSensitivity
-
     this.scroll.target += adjustedDelta
-
     this.wheelEvents = []
   }
 
@@ -171,6 +161,18 @@ export default class InteractionState {
     )
 
     this.currentWheelDelta = distance
+
+    // マウス位置の線形補完
+    this.mousePosition.x = GSAP.utils.interpolate(
+      this.mousePosition.x,
+      this.targetMousePosition.x,
+      this.mouseLerpFactor
+    )
+    this.mousePosition.y = GSAP.utils.interpolate(
+      this.mousePosition.y,
+      this.targetMousePosition.y,
+      this.mouseLerpFactor
+    )
   }
 
   public getScrollAmount(): number {
